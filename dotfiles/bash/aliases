@@ -1,4 +1,11 @@
+
 # Command Enhancements
+
+#Subversion svn 
+#alias svnm="svn rm $( svn status | sed -e '/^!/!d' -e 's/^!//' )"
+alias svnaf='svn add * --force'
+alias svns='svn status'
+alias svnc='svn commit'
 
 # Utility
 alias reload='source ~/bin/dotfiles/bash/aliases'
@@ -6,6 +13,7 @@ alias ea='mate -w ~/bin/dotfiles/bash/aliases && reload' # Edit aliases
 alias ee="mate ~/bin/dotfiles/bash/env"
 
 # Quicker cd
+alias cdh='cd /Applications/MAMP/htdocs'
 alias cg='cd /Library/Ruby/Gems/1.8/gems/'
 function cr() {
  cd ~/repos/$*
@@ -133,15 +141,15 @@ function markdown() {
 }
 
 # Rails
-alias mr='mongrel_rails start'
-alias ms='mongrel_rails stop'
-alias rp='touch tmp/restart.txt'
-alias sc='./script/console'
-alias sg='./script/generate'
-alias sp='./script/plugin'
-alias ss='./script/server'
-alias tl='tail -f log/*.log'
-alias ts='thin start'
+# alias mr='mongrel_rails start'
+# alias ms='mongrel_rails stop'
+# alias rp='touch tmp/restart.txt'
+# alias sc='./script/console'
+# alias sg='./script/generate'
+# alias sp='./script/plugin'
+# alias ss='./script/server'
+# alias tl='tail -f log/*.log'
+# alias ts='thin start'
 
 # TDD / BDD
 
