@@ -1,7 +1,9 @@
 
 # Command Enhancements
 
-#Subversion svn 
+#MUHAHAHAHAHA
+
+#Subversion svn
 #alias svnm="svn rm $( svn status | sed -e '/^!/!d' -e 's/^!//' )"
 alias svnaf='svn add * --force'
 alias svns='svn status'
@@ -9,8 +11,8 @@ alias svnc='svn commit'
 
 # Utility
 alias reload='source ~/bin/dotfiles/bash/aliases'
-alias ea='mate -w ~/bin/dotfiles/bash/aliases && reload' # Edit aliases
-alias ee="mate ~/bin/dotfiles/bash/env"
+alias ea='subl -w ~/bin/dotfiles/bash/aliases && reload' # Edit aliases
+alias ee="subl ~/bin/dotfiles/bash/env"
 
 # Quicker cd
 alias cdh='cd /Applications/MAMP/htdocs'
@@ -25,8 +27,8 @@ alias la="ls -A -l -G"
 alias c='clear'
 alias cdd='cd -'  # goto last dir cd'ed from
 alias cl='clear; l'
-function cdc() { 
-    cd $1; ls 
+function cdc() {
+    cd $1; ls
 }
 alias cls='clear; ls'
 alias h='history'
@@ -39,15 +41,15 @@ alias lt='ls -lt' # sort with recently modified first
 alias md='mkdir -p'
 alias s='cd ..'   # up one dir
 
-function take() { 
+function take() {
     mkdir -p "$1"
-    cd "$1" 
+    cd "$1"
 }
 
 alias e='exit'
 alias k9="killall -9"
-function killnamed () { 
-    ps ax | grep $1 | cut -d ' ' -f 2 | xargs kill 
+function killnamed () {
+    ps ax | grep $1 | cut -d ' ' -f 2 | xargs kill
 }
 function zipr() {
   zip -r $1.zip $1
@@ -60,8 +62,8 @@ alias ff='open -a Firefox'
 # General code
 
 # From Chris Wanstrath
-function pless() { 
-    pygmentize $1 | less -r 
+function pless() {
+    pygmentize $1 | less -r
 }
 
 # Processes
@@ -75,48 +77,30 @@ function new-hg() {
 }
 
 # Git
-alias ungit="find . -name '.git' -exec rm -rf {} \;"
-alias gb='git branch'
-alias gba='git branch -a'
-alias gc='git commit -v'
-alias gca='git commit -v -a'
-# Commit pending changes and quote all args as message
-function gg() { 
-    git commit -v -a -m "$*"
-}
-alias gco='git checkout'
-alias gd='git diff'
-alias gdm='git diff master'
-alias gl='git pull'
-alias gnp="git-notpushed"
-alias gp='git push'
+alias gc="git commit -m $1"
+alias gcp=git_commit_and_push
+alias gca="git add -A; git commit -m $1"
+alias gcap=git_add_all_commit_and_push
 alias gst='git status'
-alias gt='git status'
-alias g='git status'
-alias eg='mate .git/config'
-# Git clone from GitHub
-function gch() {
-  git clone git://github.com/$USER/$1.git
+alias gf='git fetch'
+alias gm='git merge origin'
+alias gp='git push'
+alias gpl='git pull'
+alias gpom="git pull origin master"
+alias gst='git status'
+
+function git_add_all_commit_and_push () {
+  git add -A;
+  git commit -m "$1";
+  git push;
 }
 
-# Setup a tracking branch from [remote] [branch_name]
-function gbt() { 
-  git branch --track $2 $1/$2 && git checkout $2 
+function git_commit_and_push () {
+  git commit -a -m "$1";
+  git push;
 }
-# Quickly clobber a file and checkout
-function grf() { 
-  rm $1
-  git checkout $1 
-}
-# Call from inside an initialized Git repo, with the name of the repo.
-function new-git() {
-  ssh git@example.com "mkdir $1.git && cd $1.git && git --bare init"
-  git remote add origin git@example.com:$1.git
-  git push origin master
-  git config branch.master.remote origin
-  git config branch.master.merge refs/heads/master
-  git config push.default current
-}
+
+
 
 # Text editing
 # Emacs
@@ -128,16 +112,12 @@ function ct() {
   etags --append --output=TAGS $*
 }
 
-# TextMate
-alias et="mate"
-alias ett="mate ."
-alias etr="mate app config lib db schema public spec test vendor/gems vendor/plugins Rakefile Capfile Vladfile Todofile README stories merb slices tasks features &"
 
 # Ruby
 alias r="rake"
 
-function markdown() { 
-/Applications/TextMate.app/Contents/SharedSupport/Support/bin/Markdown.pl $1 > $1.html 
+function markdown() {
+/Applications/TextMate.app/Contents/SharedSupport/Support/bin/Markdown.pl $1 > $1.html
 }
 
 # Rails
@@ -158,20 +138,20 @@ alias aaf='autotest -f' # Don't run all at start
 alias aas="./script/autospec"
 
 # Setup a tunnel
-function haproxyssh() { 
-  ssh -L7997:127.0.0.1:7997 deploy@$1.com 
+function haproxyssh() {
+  ssh -L7997:127.0.0.1:7997 deploy@$1.com
 }
 
 # Syntax check Javascript
-function jsc() { 
-  jsl -conf /etc/jsl/jsl.conf -process $1 
+function jsc() {
+  jsl -conf /etc/jsl/jsl.conf -process $1
 }
 
-function aiff2mp3() { 
-  lame -h -V 0 $1.aif $1.mp3 
+function aiff2mp3() {
+  lame -h -V 0 $1.aif $1.mp3
 }
-function wav2mp3() { 
-  lame -h -V 0 $1.wav $1.mp3 
+function wav2mp3() {
+  lame -h -V 0 $1.wav $1.mp3
 }
 
 
@@ -181,8 +161,8 @@ alias sx="xcodebuild clean && ~/src/checker-0.146/scan-build -k -V xcodebuild"
 # Analyze test build
 alias sxt="xcodebuild -target Test clean && ~/src/checker-0.146/scan-build -k -V xcodebuild -target Test"
 # Call with -target Foo
-function sxx() { 
-  xcodebuild $* clean && ~/src/checker-0.146/scan-build -k -V xcodebuild $* 
+function sxx() {
+  xcodebuild $* clean && ~/src/checker-0.146/scan-build -k -V xcodebuild $*
 }
 
 alias ox="open *.xcodeproj"

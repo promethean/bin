@@ -1,0 +1,30 @@
+#!/bin/bash
+set -e
+
+BRANCH=$(git branch | grep '*' | cut -c3-);
+
+while getopts p o
+do	case "$o" in
+	p)	echo "PULL";
+                git pull origin $BRANCH;;
+	[?])	print >&2 "Usage: $0 [-p] [live]"
+		exit 1;;
+	esac
+done
+shift $(($OPTIND-1));
+
+echo "PUSH"
+git push origin $BRANCH
+
+echo "DEV SERVER : root@dev.stockopedia.co.uk"
+ssh root@dev.stockopedia.co.uk "cd /var/www/prototype/Symfony/app;
+if [ "$BRANCH" = $(git branch | grep '*' | cut -c3-) ]
+  then
+    git pull origin $BRANCH;
+fi
+"
+
+if [ "$1" = "live" ]; then
+    echo "LIVE SERVER : adil@www.stockopedia.co.uk"
+    ssh -p 3287 adil@www.stockopedia.co.uk "cd /var/www/prototype/Symfony/app; git pull origin master"
+fi

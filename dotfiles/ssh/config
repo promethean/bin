@@ -1,5 +1,27 @@
+Host new
+HostName app1.stockopedia.co.uk
+User ubuntu
+
+
 Host live
 
 HostName www.stockopedia.co.uk
 User ed
 Port 3287
+
+Host dev
+
+HostName dev.stockopedia.co.uk
+User root
+
+Host aws.batch1
+Hostname ec2-54-242-173-217.compute-1.amazonaws.com
+
+Host aws.mongo1
+HostName ec2-107-20-84-241.compute-1.amazonaws.com
+
+Host aws.redis
+Hostname ec2-107-20-11-74.compute-1.amazonaws.com
+
+Host aws
+Hostname ubuntu@ec2-50-17-62-171.compute-1.amazonaws.com
